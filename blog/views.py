@@ -12,7 +12,7 @@ news = [
         'title': 'Наша вторая запись запись',
         'text': 'Просто большой текст для 2 записи',
         'date': '1 Января 2019',
-        'avtor': 'Джон'
+
     }
 ]
 
@@ -26,4 +26,4 @@ def home(request):
 
 
 def contacti(request):
-    return render(request, 'blog/contacti.html')
+    return render(request, 'blog/contacti.html', {'title': 'Страничка про нас'})

@@ -1,13 +1,16 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title></title>
-</head>
-<body>
+{% extends 'blog/main.html' %}
+{% block main_section %}
     <h3>Страница с контактами</h3>
-</body>
-</html>
+{% endblock main_section %}
+
+{% block aside_news_section %}
+
+    <h3>5 лучших игровых движков</h3>
+    <img src="https://cdn.filestackcontent.com/jS7r8B4eQsKRwPFogWe5" class="img-thumbnail mb-1">
+    <p>С развитием сферы игростроения появилось огромное множество всевозможных движков. Выбрать подходящий бывает очень не просто. Мы расскажем вам про 5 лучших игровых движков для создания игр всех тематик.
+    </p>
+    <a href="https://itproger.com/news/20" target="_blank">
+        <button class="btn btn-warning">Посмотреть</button>
+    <a/>
+
+{% endblock aside_news_section %}

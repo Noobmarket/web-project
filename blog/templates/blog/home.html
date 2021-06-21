@@ -1,19 +1,32 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ title }}</title>
-</head>
-<body>
+{% extends 'blog/main.html' %}
+{% block main_section %}
     {% for post in news %}
-        <h1>{{ post.title }}</h1>
-        <p>{{ post.text }}</p>
+        <div class="alert alert-light">
+            <h1>{{ post.title }}</h1>
+            <p>{{ post.text }}</p>
+            <span class="text-muted">Публикация: {{ post.date }}</span>
+            {% if post.avtor %}
+                <p>Автор: {{ post.avtor }}<p>
+            {% else %}
+                <p>Автор: Админ</p>
+            {% endif %}
+        </div>
+            {% endfor %}
+{% endblock main_section %}
 
-        <p>Автор: {{ post.avtor }}<p>
-        <p>Дата: {{ post.date }}</p>
-    {% endfor %}
-</body>
-</html>
+{% block aside_news_section %}
+
+    <h3>10 фильмов и сериалов для программистов</h3>
+    <img src="https://dvlog.ru/education_for_school/images/1cprog.jpg" class="img-thumbnail mb-1">
+    <p>Когда становишься на путь программирования очень хочется посмотреть какие- либо фильмы и сериалы на эту тематикую Представляем вам подборку из 10 фильмов для программистов </p>
+    <a href="https://itproger.com/news/1" target="_blank">
+        <button class="btn btn-warning">Посмотреть</button>
+    <a/>
+
+{% endblock aside_news_section %}
+
+
+
+
+
+
