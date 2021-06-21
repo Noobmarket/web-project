@@ -4,11 +4,11 @@
         <div class="alert alert-light">
             <h1>{{ post.title }}</h1>
             <p>{{ post.text }}</p>
-            <span class="text-muted">Публикация: {{ post.date }}</span>
+            <span class="text-muted"><b>Дата:</b> {{ post.date | date:'j F Y, время: H:i:s' }}</span>
             {% if post.avtor %}
-                <p>Автор: {{ post.avtor }}<p>
+                <p><b>Автор:</b> {{ post.avtor }}<p>
             {% else %}
-                <p>Автор: Админ</p>
+                <p><b>Автор:</b> Админ</p>
             {% endif %}
         </div>
             {% endfor %}
