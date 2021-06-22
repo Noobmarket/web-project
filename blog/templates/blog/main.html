@@ -37,6 +37,13 @@
     <main class="container">
         <div class="row">
             <div class="col-md-8">
+                {% if messages %}
+                    {% for mess in messages %}
+                        <div class="alert alert-success">
+                            {{ mess }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
                {% block main_section %}
                 {% endblock %}
             </div>
