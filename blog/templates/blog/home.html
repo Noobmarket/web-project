@@ -13,10 +13,11 @@
                    {% endif %}
                </div>
                 <div class="col-md-10">
-                <span class="text-muted"><b>Дата:</b> {{ post.date | date:'j F Y, время: H:i:s' }}</span>
+                <span class="text-muted"><b>Дата:</b> {{ post.date | date:'d E Y H:i:s' }}</span>
                 <p><b>Автор:</b><mark>{{ post.avtor }}</mark> <p>
                 </div>
             </div>
+            <a href="{% url 'news-detail' post.id %}" class="btn-btn-outline-warning">Читать далее</a>
         </div>
             {% endfor %}
 {% endblock main_section %}

@@ -1,20 +1,14 @@
 from django.shortcuts import render
-from .models import News
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView
+)
 
-news = [
-    {
-        'title': 'Наша первая запись',
-        'text': 'Просто большой текст для 1 записи',
-        'date': '1 Января 2019',
-        'avtor': 'Георгий'
-    },
-    {
-        'title': 'Наша вторая запись',
-        'text': 'Просто большой текст для 2 записи',
-        'date': '1 Января 2019',
-        'avtor': 'Вова'
-    }
-]
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from .models import News
 
 
 def home(request):
@@ -23,6 +17,62 @@ def home(request):
         'title': 'Главная страница блога'
     }
     return render(request, 'blog/home.html', data)
+
+
+class DeleteNewsView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = News
+    success_url = '/'
+
+    def test_func(self):
+        news = self.get_object()
+        if self.request.user == news.avtor:
+            return True
+        return False
+
+
+class ShowNewsView(ListView):
+    model = News
+    template_name = 'blog/home.html'
+    context_object_name = 'news'
+    ordering = ['-date']
+
+    def get_context_data(self, **kwards):
+        ctx = super(ShowNewsView, self).get_context_data(**kwards)
+        ctx['title'] = 'Главная страница блога'
+        return ctx
+
+
+class NewsDetailView(DetailView):
+    model = News
+
+    def get_context_data(self, **kwards):
+        ctx = super(NewsDetailView, self).get_context_data(**kwards)
+        ctx['title'] = News.objects.filter(pk=self.kwargs['pk']).first()
+        return ctx
+
+
+class UpdateNewsView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = News
+    fields = ['title', 'text']
+
+    def form_valid(self, form):
+        form.instance.avtor = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        news = self.get_object()
+        if self.request.user == news.avtor:
+            return True
+        return False
+
+
+class CreatNewsView(LoginRequiredMixin, CreateView):
+    model = News
+    fields = ['title', 'text']
+
+    def form_valid(self, form):
+        form.instance.avtor = self.request.user
+        return super().form_valid(form)
 
 
 def contacti(request):
