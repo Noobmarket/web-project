@@ -4,12 +4,19 @@
         <div class="alert alert-light">
             <h1>{{ post.title }}</h1>
             <p>{{ post.text }}</p>
-            <span class="text-muted"><b>Дата:</b> {{ post.date | date:'j F Y, время: H:i:s' }}</span>
-            {% if post.avtor %}
-                <p><b>Автор:</b> {{ post.avtor }}<p>
-            {% else %}
-                <p><b>Автор:</b> Админ</p>
-            {% endif %}
+            <div class="row">
+               <div class="col-md-2">
+                   {% if post.avtor.profile.img %}
+                   <img src="{{ post.avtor.profile.img.url }}" alt="{{ post.avtor }}" class="user_image">
+                   {% else %}
+                   <img src="/pictures/default.jpg" alt="{{ post.avtor }}" class="user_image">
+                   {% endif %}
+               </div>
+                <div class="col-md-10">
+                <span class="text-muted"><b>Дата:</b> {{ post.date | date:'j F Y, время: H:i:s' }}</span>
+                <p><b>Автор:</b><mark>{{ post.avtor }}</mark> <p>
+                </div>
+            </div>
         </div>
             {% endfor %}
 {% endblock main_section %}
