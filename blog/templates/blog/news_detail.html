@@ -2,7 +2,7 @@
 {% block main_section %}
     <div class="alert alert-light">
         <a href="{% url 'blog-home' %}">Вернуться назад</a>
-        <p>{{ object.text }}</p>  <div class="row">
+        <p>{{ object.text|safe }}</p>  <div class="row">
         <h1>{{ object.title }}</h1>
         <div class="col-md-2">
             {% if post.avtor.profile.img %}
@@ -13,7 +13,7 @@
         </div>
         <div class="col-md-10">
             <span class="text-muted"><b>Дата:</b> {{ object.date | date:'d E Y H:i:s' }}</span>
-            <p><b>Автор:</b><mark>{{ object.avtor }}</mark> <p>
+            <p><b>Автор:</b><a href="{% url 'user-news' object.avtor %}">{{ object.avtor }}</a> <p>
         </div>
     </div>
     {% if object.avtor == user %}
